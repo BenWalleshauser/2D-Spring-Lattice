@@ -35,7 +35,7 @@ Y(n/2,m/2) = 4;
 
 %% Forward Euler
 
-%New notation helps uncouple 2nd order ODES 
+%Uncouple 2nd order ODES 
 Z = zeros(n+2,m+2,length(t_total));
 W = zeros(n+2,m+2,length(t_total));
 
