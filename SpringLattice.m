@@ -1,7 +1,7 @@
 %B.W.
 %2/17/22
 
-%Simulating 2-D spring lattice w/. forward euler
+%Simulating 2-D spring lattice w/. forward Euler
 %%
 
 %Time
