@@ -7,7 +7,7 @@ clear
 clc
 close all
 %Time
-t_total = 100;
+t_total = 1200;
 h = 0.01;
 time_step = 0:h:t_total;
 
@@ -21,29 +21,29 @@ Ln = 10;
 mass = 0.1;
 
 %Number of lattice points
-n = 10;
-m = 10;
+n = 4;
+m = 4;
 
 %Displacements in the x-direction of the atoms (adding two in each
 %direction as a solid boundary)
-X = zeros(n+2,m+2,length(time_step));
+X = zeros(n+2,m+2,length(t_total));
 
 %Displacement in the y-direction of the atoms
-Y = zeros(n+2,m+2,length(time_step));
+Y = zeros(n+2,m+2,length(t_total));
 
 %Perturb a node
-X(n/2,m/2) = 4;
-Y(n/2,m/2) = 5;
+X(n/2,m/2) = 15;
+Y(n/2,m/2) = 15;
 
 %% Forward Euler
 
 %New notation helps uncouple 2nd order ODES 
-Z = zeros(n+2,m+2,length(time_step));
-W = zeros(n+2,m+2,length(time_step));
+Z = zeros(n+2,m+2,length(t_total));
+W = zeros(n+2,m+2,length(t_total));
 
 for t = 1:length(time_step)
-    for i = 2:1:n-1
-        for j = 2:1:m-1
+    for i = 2:1:n+1
+        for j = 2:1:m+1
             
             %right
             dx = X(i,j+1,t)-X(i,j,t)+Ln;
@@ -101,9 +101,10 @@ y_vec = zeros((n-2)*(m-2),length(time_step));
 it = 1;
 
 for t = 1:length(time_step)  
-    for i = 2:1:n-1
-        for j = 2:1:m-1
+    for i = 2:1:n+1
+        for j = 2:1:m+1
             x_vec(it,t) = X(i,j,t)+j*Ln;
+            y_vec(it,t) = Y(i,j,t) + m*Ln - i*Ln;
             it = it+1;
         end
     end
@@ -111,8 +112,8 @@ for t = 1:length(time_step)
 end
 
 for t = 1:length(time_step)  
-    for i = 2:1:n-1
-        for j = 2:1:m-1
+    for i = 2:1:n+1
+        for j = 2:1:m+1
             y_vec(it,t) = Y(i,j,t) + m*Ln - i*Ln;
             it = it+1;
         end
@@ -123,32 +124,9 @@ end
 close all
 for i = 1:1/(5*h):length(time_step)
    figure(1)
+   grid on
    plot(x_vec(:,i),y_vec(:,i),'o') 
-   xlim([Ln n*Ln])
-   ylim([0 m*Ln-Ln])
+   xlim([min(min(x_vec)) max(max(x_vec))])
+   ylim([min(min(y_vec)) max(max(y_vec))])
    pause(0.01); 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
