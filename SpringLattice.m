@@ -111,16 +111,6 @@ for t = 1:length(time_step)
     it = 1;
 end
 
-for t = 1:length(time_step)  
-    for i = 2:1:n+1
-        for j = 2:1:m+1
-            y_vec(it,t) = Y(i,j,t) + m*Ln - i*Ln;
-            it = it+1;
-        end
-    end
-    it = 1;
-end
-
 close all
 for i = 1:1/(5*h):length(time_step)
    figure(1)
