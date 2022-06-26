@@ -18,7 +18,7 @@ k = 0.1;
 Ln = 10;
 
 %Mass of particles
-m = 0.001;
+mass = 0.1;
 
 %Number of lattice points
 n = 10;
@@ -84,10 +84,10 @@ for t = 1:length(time_step)
             Fx = Fx_right + Fx_left + Fx_top + Fx_bottom;
             Fy = Fy_right + Fy_left + Fy_top + Fy_bottom;
             
-            Z(i,j,t+1) = Z(i,j,t) + h*Fx/m;
+            Z(i,j,t+1) = Z(i,j,t) + h*Fx/mass;
             X(i,j,t+1) = X(i,j,t) + h*Z(i,j,t+1);
             
-            W(i,j,t+1) = W(i,j,t) + h*Fy/m;
+            W(i,j,t+1) = W(i,j,t) + h*Fy/mass;
             Y(i,j,t+1) = Y(i,j,t) + h*W(i,j,t+1);
             
         end
