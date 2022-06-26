@@ -26,10 +26,10 @@ m = 10;
 
 %Displacements in the x-direction of the atoms (adding two in each
 %direction as a solid boundary)
-X = zeros(n+2,m+2,length(t_total));
+X = zeros(n+2,m+2,length(time_step));
 
 %Displacement in the y-direction of the atoms
-Y = zeros(n+2,m+2,length(t_total));
+Y = zeros(n+2,m+2,length(time_step));
 
 %Perturb a node
 X(n/2,m/2) = 4;
@@ -38,8 +38,8 @@ Y(n/2,m/2) = 5;
 %% Forward Euler
 
 %New notation helps uncouple 2nd order ODES 
-Z = zeros(n+2,m+2,length(t_total));
-W = zeros(n+2,m+2,length(t_total));
+Z = zeros(n+2,m+2,length(time_step));
+W = zeros(n+2,m+2,length(time_step));
 
 for t = 1:length(time_step)
     for i = 2:1:n-1
